@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
@@ -19,5 +19,7 @@ urlpatterns = [
     path('tracking/',TemplateView.as_view(template_name = 'tracking.html'),name='tracking'),
     path('elements/',TemplateView.as_view(template_name = 'elements.html'),name='elements'),
     path('contact/',TemplateView.as_view(template_name = 'contact.html'),name='contact'),
+
+    path('product/',include('product.urls'))
 
 ]
