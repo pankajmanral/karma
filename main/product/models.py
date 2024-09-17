@@ -15,3 +15,4 @@ class product_type(models.Model):
     desc = models.TextField(max_length=50)
     def __str__(self) -> str:
         return self.type_name
+    
