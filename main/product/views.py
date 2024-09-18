@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import product
 # Create your views here.
 
@@ -20,3 +20,19 @@ def add_product(request):
         return render(request,'product/product_list.html')
     elif request.method == "GET":
         return render(request,'product/add_product.html')
+    
+def update_product(request,id):
+    # product = product.objects.get(id = id)
+    pro = get_object_or_404(product,id=id)
+    if request.method == "POST":
+        pro.name = request.POST.get('name')
+        pro.price = request.POST.get('price')
+        pro.save()
+        return redirect('product')
+        # POST method is used to get the data from the form 
+
+    elif request.method == 'GET':
+        print(pro.name )
+        return render(request,'product/update_product.html',{'pro':pro})
+
+        # GET method is used to redirect to the update page

@@ -7,6 +7,13 @@
         <h2>{{ pro.name }}</h2>
         <h2>{{ pro.price }}</h2>
     </div>
+    <div>
+        <form action="{% url 'update_product' pro.id %}" method="get">
+            <input style="cursor: pointer;" type="submit" value="Update Product">
+            <hr>
+            <!-- Horizontal ruler -->
+        </form>
+    </div>
 {% endfor %}
 
 {% endblock %}
