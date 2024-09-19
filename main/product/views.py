@@ -35,4 +35,12 @@ def update_product(request,id):
         print(pro.name )
         return render(request,'product/update_product.html',{'pro':pro})
 
-        # GET method is used to redirect to the update page
+        # GET method is used to redirect to the update page)
+    
+def confirm_product(request,id):
+    pro = get_object_or_404(product,id=id)
+    if request.method=="POST":
+        pro.delete()
+        return redirect('product')
+    elif request.method=="GET":
+        return render(request,'product/confirm_delete.html',{'pro':pro})

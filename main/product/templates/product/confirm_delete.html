@@ -1,0 +1,42 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- <button onclick="confirmDelete({{ product.id }}, '{{ product.name }}')">Delete Product</button>
+
+<script>
+    function confirmDelete(productName,productId){
+    if (window.confirm(`Are you sure you want to delete ${productName} with ID ${productId}?`)) {
+            // Make a POST request to delete the product
+            fetch(`/delete-product/${productId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'  // Add CSRF token
+                },
+                body: JSON.stringify({ id: productId }),
+            })    
+        }
+        } -->
+    // window.confirm("are you really want to delete {{pro.name}}")
+</script>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>
+    are you really want to delete {{pro.name}}"
+</p>
+<form action="{% url 'confirm_delete' pro.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Confirm">
+</form>
+<a href="{% url 'product' %}">NO</a>
+
+
+{% endblock %}

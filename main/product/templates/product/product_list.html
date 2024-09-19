@@ -8,6 +8,7 @@
         <h2>{{ pro.price }}</h2>
     </div>
     <div>
+        <a href="{% url 'confirm_delete' pro.id %}">Delete Product</a>
         <form action="{% url 'update_product' pro.id %}" method="get">
             <input style="cursor: pointer;" type="submit" value="Update Product">
             <hr>
