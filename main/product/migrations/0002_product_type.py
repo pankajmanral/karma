@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ('product', '0001_initial'),
     ]
-
+    
     operations = [
         migrations.CreateModel(
             name='product_type',

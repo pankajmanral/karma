@@ -10,6 +10,8 @@ class product(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=25)
+    def __str__(self):
+        return self.name
 
 
 class product_type(models.Model):
