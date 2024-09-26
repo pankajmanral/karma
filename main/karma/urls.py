@@ -13,6 +13,8 @@ urlpatterns = [
     path('checkout/',TemplateView.as_view(template_name = 'checkout.html'),name='checkout'),
     path('cart/',TemplateView.as_view(template_name = 'cart.html'),name='cart'),
     path('confirmation/',TemplateView.as_view(template_name = 'confirmation.html'),name='confirmation'),
+    path('product/',include('product.urls')),
+    
     path('blog/',TemplateView.as_view(template_name = 'blog.html'),name='blog'),
     path('single-blog/',TemplateView.as_view(template_name = 'single-blog.html'),name='single-blog'),
     path('login/',TemplateView.as_view(template_name = 'login.html'),name='login'),
@@ -20,6 +22,5 @@ urlpatterns = [
     path('elements/',TemplateView.as_view(template_name = 'elements.html'),name='elements'),
     path('contact/',TemplateView.as_view(template_name = 'contact.html'),name='contact'),
 
-    path('product/',include('product.urls'))
 
 ]

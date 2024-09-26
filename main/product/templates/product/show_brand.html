@@ -1,0 +1,58 @@
+{% extends 'base.html' %} {% block content %}
+
+<style>
+  .container {
+    display: flex;
+    gap: 2rem;
+  }
+  a{
+    text-decoration: none;
+    color: black;
+  }
+  .card {
+    height: 7rem;
+    width: 15rem;
+    background: rgb(128, 128, 128);
+    margin-top: 10rem;
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    border-radius: 10px;
+  }
+  h4{
+    color: white;
+  }
+  .additional{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  button{
+    border-radius: 20rem;
+  }
+</style>
+
+<div class="container">
+  {% for i in brand %}
+
+  <div class="card">
+
+    <h4>{{i.name}}</h4>
+    <h4>{{i.description}}</h4>
+
+    <div class="additional">
+        <button><a href="{% url 'update_brand' i.id %}">Update Product</a></button>
+        <button>Delete brand</button>
+    </div>
+
+  </div>
+
+  {% endfor %}
+  <button style="height: 40px;position: fixed;top: 40%;left: 90%;"><a href="{% url 'add_brand' %}">Add brand</a></button>
+
+</div>
+
+{% endblock %}

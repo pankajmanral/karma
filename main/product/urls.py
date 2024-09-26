@@ -1,14 +1,17 @@
-from django.urls import path 
+from django.urls import path
 from . import views
 
 
 urlpatterns = [
 
-    path('product_list/',views.products,name='product'),
-    path('add_product/',views.add_product,name='add_product'),
-    path('product_types/',views.product_types,name='product_types'),
-    path('update_product/<int:id>/',views.update_product,name='update_product'),
-    path('confirm_delete/<int:id>/',views.confirm_product,name='confirm_delete'),
-    path('delete_productType/<int:id>/',views.delete_productType,name='delete_productType'),
+    path('show-brand/',views.show_brand,name='show_brand'),
+    path('add-brand/',views.AddBrand.as_view(),name='add_brand'),
+    path('update-brand/<int:id>',views.UpdateBrand.as_view(),name='update_brand'),
+    path('show-product/',views.show_product,name='show_product'),
+    path('add-product/',views.AddProduct.as_view(),name='add_product'),
+    path('update-product/<int:id>',views.UpdateProduct.as_view(),name='update_product'),
+    path('show-product-style/',views.show_product_type,name='show_product_type'),
+    path('add-product-type/',views.AddProductType.as_view(),name='add_product_type'),
+    path('update-product-type/<int:id>',views.UpdateProductType.as_view(),name='update_product_type')
 
 ]

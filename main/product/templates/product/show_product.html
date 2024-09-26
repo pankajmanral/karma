@@ -1,0 +1,57 @@
+{% extends 'base.html' %} {% block content %}
+
+<style>
+  .container {
+    display: flex;
+    gap: 2rem;
+  }
+  a{
+    text-decoration: none;
+    color: black;
+  }
+  .card {
+    height: 12rem;
+    width: 15rem;
+    background: rgb(128, 128, 128);
+    margin-top: 10rem;
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    border-radius: 10px;
+  }
+  h4{
+    color: white;
+  }
+  .additional{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  button{
+    border-radius: 20rem;
+  }
+</style>
+
+<div class="container">
+  {% for i in product %}
+
+  <div class="card">
+
+    <h4>{{i.name}}</h4>
+    <h4>{{i.price}}</h4>
+    <h4>{{i.description}}</h4>
+
+    <div class="additional">
+        <button><a href="{% url 'add_product' %}">Add product</a></button>
+        <button><a href="{% url 'update_product' i.id %}">Update Product</a></button>
+    </div>
+
+  </div>
+
+  {% endfor %}
+</div>
+
+{% endblock %}

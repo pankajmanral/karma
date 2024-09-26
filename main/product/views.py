@@ -1,67 +1,94 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import product
-from .models import product_type
-# Create your views here.
+from . models import Product,Brand,Style
+from django.views import View
+from . forms import ProductForm,BrandForm,ProductTypeForm
 
-def products(request):
-    data = product.objects.all()
-    context = {
-        'products' : data
-    }
-    return render(request,'product/product_list.html',context)
+# Brand CRUD
+def show_brand(request):
+    data = Brand.objects.all()
+    return render(request,'product/show_brand.html',{'brand':data})
 
-
-def add_product(request):
-    if request.method == "POST":
-        name = request.POST.get('name')
-        price = request.POST.get('price')
-                              #database name = created variable
-        product.objects.create(name = name , price = price)
-
-        return render(request,'product/product_list.html')
-    elif request.method == "GET":
-        return render(request,'product/add_product.html')
+class AddBrand(View):
+    def get(self,request):
+        form = BrandForm()
+        return render(request,'product/add_brand.html',{'form':form})
+    def post(self,request):
+        form = BrandForm(request.POST)
+        if form.is_valid(): 
+            form.save()
+            return redirect('show_brand')
+        return render(request,'product/add_brand.html',{'form':form})
     
-def update_product(request,id):
-    # product = product.objects.get(id = id)x
-    pro = get_object_or_404(product,id=id)
-    if request.method == "POST":
-        pro.name = request.POST.get('name')
-        pro.price = request.POST.get('price')
-        pro.save()
-        return redirect('product')
-        # POST method is used to get the data from the form 
-
-    elif request.method == 'GET':
-        print(pro.name )
-        return render(request,'product/update_product.html',{'pro':pro})
-
-        # GET method is used to redirect to the update page)
+class UpdateBrand(View):
+    def get(self,request,id):
+        data = get_object_or_404(Brand,id=id)
+        form = BrandForm(instance=data)
+        return render(request,'product/update_brand.html',{'form':form,'data':data})
+    def post(self,request,id):
+        data = get_object_or_404(Brand,id=id)
+        form = BrandForm(request.POST,instance=data)
+        if form.is_valid():
+            form.save()
+            return redirect('show_brand')
+        return render(request,'product/add_brand.html',{'form':form})
     
-def confirm_product(request,id):
-    pro = get_object_or_404(product,id=id)
-    if request.method=="POST":
-        pro.delete()
-        return redirect('product')
-    elif request.method=="GET":
-        return render(request,'product/confirm_delete.html',{'pro':pro})
+# Product CRUD 
+def show_product(request):
+    data = Product.objects.all()
+    return render(request,'product/show_product.html',{'product':data})   
+
+class AddProduct(View):
+    def get(self,request):
+        form = ProductForm()
+        return render(request,'product/add_product.html',{'form':form})
+    def post(self,request):
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('show_product')
+        return render(request,'product/add_product.html',{'form':form})
     
-def product_types(request):
-    data = product_type.objects.all()
-    context = {
-        'product_types' : data
-    }
-    return render(request,'product/product_types.html',context)
-
-
-def delete_productType(request,id):
-    data = get_object_or_404(product_type,id=id)
-    if request.method == "POST":
-        data.delete()
-        return redirect('product_types')
+class UpdateProduct(View):
+    def get(self,request,id):
+        data = get_object_or_404(Product,id=id)
+        form = ProductForm(instance=data)
+        return render(request,'product/update_product.html',{'form':form})
     
-    context = {
-        'data' : data
-    }
+    def post(self,request,id):
+        data = get_object_or_404(Product,id=id)
+        form = ProductForm(request.POST,instance=data)
+        if form.is_valid():
+            form.save()
+            return redirect('show_product')
+        return render(request,'product/update_product.html',{'form':form})
+        
+# Show Product Type 
+def show_product_type(request):
+    data = Style.objects.all()
+    return render(request,'product/show_product_type.html',{'type':data})
 
-    return render(request,'product/delete_productType.html',context)
+class AddProductType(View):
+    def get(self,request):
+        form = ProductTypeForm()
+        return render(request,'product/add_product_type.html',{'form':form})
+    def post(self,request):
+        form = ProductTypeForm(request.POST)
+        form.save()
+        if form.is_valid():
+            return redirect('show_product_type')
+        return render(request,'product/add_product_type.html',{'form':form})
+               
+class UpdateProductType(View):
+    def get(self,request,id):
+        data = get_object_or_404(Style,id=id)
+        form = ProductTypeForm(instance=data)
+        return render(request,'product/update_product_type.html',{'form':form})
+    def post(self,request,id):
+        data = get_object_or_404(Style,id=id)
+        form = ProductTypeForm(request.POST,instance=data,)
+        form.save()
+        if form.is_valid():
+            return redirect('show_product_type')
+        return render(request,'product/update_product_type.html',{'form':form})
+    
+    

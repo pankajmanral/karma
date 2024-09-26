@@ -4,6 +4,7 @@
   .container {
     display: flex;
     justify-content: center;
+    align-items: center;
   }
   .add {
     margin-top: 10rem;
@@ -15,7 +16,7 @@
     {% csrf_token %}
     <div class="add">
       {{form.as_p}}
-      <input type="submit" value="Add Product" />
+      <input type="submit" value="Add Style" />
     </div>
   </form>
 </div>
